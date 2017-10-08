@@ -1,0 +1,12 @@
+{
+ "reports": [
+    {
+        "time": "1506758287371",
+        "tags": ["nyc", "photo", "proudboy", "harassment"],
+        "media": {
+            "photo": "https://media2.fdncms.com/thecoast/imager/u/blog/8196717/pjimage.jpg?cb=1499176408"
+        },
+        "notes": "Sample data actually taken from an article about Halifax."
+    }
+ ]
+}
