@@ -4,14 +4,10 @@ class ReportList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialItems: [
-        'Nazi',
-        'Proud Boy',
-        'Identity Europa',
-        'Vanguard America'
-      ],
+      initialItems: [],
       items: []
     };
+
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -27,12 +23,12 @@ class ReportList extends Component {
   }
   render() {
     return (
-      <div className="filter-list">
+      <div classname="filter-list">
         <form>
-          <fieldset className="form-group">
+          <fieldset classname="form-group">
             <input
               type="text"
-              className="form-control form-control-lg"
+              classname="form-control form-control-lg"
               placeholder="Search"
               onChange={this.handleChange}
             />
@@ -47,10 +43,10 @@ class ReportList extends Component {
 class List extends Component {
   render() {
     return (
-      <ul className="list-group">
+      <ul classname="list-group">
         {this.props.items.map(function(item) {
           return (
-            <li className="list-group-item" data-category={item} key={item}>
+            <li classname="list-group-item" data-category={item} key={item}>
               {item}
             </li>
           );

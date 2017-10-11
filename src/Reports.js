@@ -16,9 +16,14 @@ class ReportRow extends Component {
     const report = this.props.report;
     return (
       <tr>
-        <td> {report.name} </td>
+        <td> {report.title} </td>
         <td> {report.notes} </td>
-        <td> {report.tags} </td>
+        <td> {report.tags.join(', ')} </td>
+        <td> {report.location} </td>
+        <td>
+          {' '}
+          <img src={report.media} />{' '}
+        </td>
       </tr>
     );
   }
@@ -33,7 +38,7 @@ class ReportTable extends Component {
     let lastCategory = null;
 
     this.props.reports.forEach(report => {
-      if (report.name.indexOf(filterText) === -1) {
+      if (report.title.indexOf(filterText) === -1) {
         return;
       }
       if (report.category !== lastCategory) {
@@ -41,16 +46,20 @@ class ReportTable extends Component {
           <ReportCategoryRow category={report.category} key={report.category} />
         );
       }
-      rows.push(<ReportRow report={report} key={report.name} />);
+      rows.push(
+        <ReportRow report={report} key={report.title} showImages={showImages} />
+      );
       lastCategory = report.category;
     });
     return (
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Title</th>
             <th>Notes</th>
             <th>Tags</th>
+            <th>Location</th>
+            <th>Media</th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
@@ -115,6 +124,9 @@ class FilterableReportTable extends Component {
   }
 
   handleShowImagesChange(showImages) {
+    if (this.state.showImages) {
+      showImages = false;
+    }
     this.setState({
       showImages: showImages
     });
