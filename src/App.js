@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Intro from './intro';
 import FilterableReportTable from './Reports';
-import SubmitForm from './SubmitForm';
+import ReportForm from './ReportForm';
 import './App.css';
+import axios from 'axios';
 
 const REPORTS = [
   {
@@ -56,15 +57,27 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reports: REPORTS
+      reports: []
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(reports) {
-    this.setState({
-      reports: reports
-    });
+  componentDidMount() {
+    var _this = this;
+    this.serverRequest = axios
+      .get('http://localhost:3000/api/reports')
+      .then(function(result) {
+        _this.setState({
+          reports: result.data.data
+        });
+      });
+  }
+
+  handleSubmit(values) {
+    // values.tags = values.tags.split(',')
+    // values.media = values.media.split(',')
+    this.state.reports.push(values);
+    axios.post('http://localhost:3000/api/addreport', values);
   }
 
   render() {
@@ -72,7 +85,10 @@ class App extends Component {
       <div>
         <Intro url="https://pad.riseup.net/p/OhEAr8p8WwTD" />
         <FilterableReportTable reports={this.state.reports} />
-        <SubmitForm reports={this.state.reports} onSubmit={this.handleSubmit} />
+        <ReportForm
+          reports={this.state.reports}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     );
   }

@@ -14,6 +14,7 @@ class ReportCategoryRow extends Component {
 class ReportRow extends Component {
   render() {
     const report = this.props.report;
+    const showImages = this.props.showImages;
     return (
       <tr>
         <td> {report.title} </td>
@@ -22,7 +23,7 @@ class ReportRow extends Component {
         <td> {report.location} </td>
         <td>
           {' '}
-          <img src={report.media} />{' '}
+          <img src={showImages ? report.media : ''} alt={report.media} />{' '}
         </td>
       </tr>
     );
@@ -37,6 +38,16 @@ class ReportTable extends Component {
     const rows = [];
     let lastCategory = null;
 
+    this.props.reports.sort(function(a, b) {
+      if (a.category < b.category) {
+        return -1;
+      }
+      if (a.category > b.category) {
+        return 1;
+      }
+      return 0;
+    });
+
     this.props.reports.forEach(report => {
       if (report.title.indexOf(filterText) === -1) {
         return;
@@ -47,7 +58,7 @@ class ReportTable extends Component {
         );
       }
       rows.push(
-        <ReportRow report={report} key={report.title} showImages={showImages} />
+        <ReportRow report={report} key={report.key} showImages={showImages} />
       );
       lastCategory = report.category;
     });

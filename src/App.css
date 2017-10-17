@@ -21,3 +21,14 @@
 .App-intro {
   font-size: large;
 }
+
+tr:nth-child(even) {
+  background: #ccc;
+}
+tr:nth-child(odd) {
+  background: #fcc;
+}
+
+h6 {
+  margin: 6px;
+}

@@ -4,11 +4,11 @@ import('./intro.css');
 class Intro extends Component {
   render() {
     return (
-      <div classname="App">
-        <header classname="App-header">
-          <h1 classname="App-title">Welcome to Nazi Reporter</h1>
+      <div className="App">
+        <header className="App-header">
+          <h1 className="App-title">Welcome to Nazi Reporter</h1>
         </header>
-        <p classname="App-intro">
+        <p className="App-intro">
           To get started, check out this <a href={this.props.url}>riseup pad</a>{' '}
           for places to start.
         </p>
